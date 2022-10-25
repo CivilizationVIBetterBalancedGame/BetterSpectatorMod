@@ -6,7 +6,7 @@
 -- INCLUDE XP2 FILE
 -- ===========================================================================
 include("UnitPanel_BBG");
-print("UnitPanel for BSM")
+print("UnitPanel_BBG for BSM")
 
 local XP2_LateInitialize 				= LateInitialize;
 local XP2_OnUnitActionClicked 			= OnUnitActionClicked;
