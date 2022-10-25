@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mod id="c6e5ad32-0600-4a98-a7cd-5854a1abcaaf" version="121">
+<Mod id="c6e5ad32-0600-4a98-a7cd-5854a1abcaaf" version="122">
     <Properties>
         <Name>LOC_BSM_TITLE</Name>
         <Description>Allows to play as an Observer. [NEWLINE]In the lobby players in the top 4 slots can choose the Spectator leader. [NEWLINE] In game use the diplomacy ribbon to click on leader and gain their POV and more.
         </Description>
         <Created>1</Created>
         <Teaser>LOC_BSM_TEASER</Teaser>
-        <Authors>D. / Jack The Narrator</Authors>
+        <Authors>D. / Jack The Narrator, FlashyFeeds</Authors>
         <SpecialThanks>Civfanatics.com, CPL, Gedemon, Sukritact, Zur13, Je, DELUXEPhilipe, Malm, Michael</SpecialThanks>
         <CompatibleVersions>1.2,2.0</CompatibleVersions>
         <Version>121</Version>
@@ -14,8 +14,8 @@
 
     <LocalizedText>
         <Text id="LOC_BSM_TITLE">
-            <en_US>Better Spectator Mod v1.2.1</en_US>
-            <fr_FR>Better Spectator Mod v1.2.1</fr_FR>
+            <en_US>Better Spectator Mod v1.2.2</en_US>
+            <fr_FR>Better Spectator Mod v1.2.2</fr_FR>
         </Text>
         <Text id="LOC_BSM_TEASER">
             <en_US>Allows to play as an Observer</en_US>
@@ -43,6 +43,14 @@
         </Criteria>
         <Criteria id="LeaderCriteriaExpansion2">
             <LeaderPlayable>Players:Expansion2_Players::LEADER_SPECTATOR</LeaderPlayable>
+        </Criteria>
+        
+        <!-- Replace Mod ID's to BBG live on release -->
+        <Criteria id = "NO_BBG5">
+            <ModInUse inverse = "1">cb84075d-5007-4207-b662-c35a5f7be254</ModInUse>
+        </Criteria>
+        <Criteria id = "BBG5">
+            <ModInUse>cb84075d-5007-4207-b662-c35a5f7be254</ModInUse>
         </Criteria>
 
     </ActionCriteria>
@@ -91,13 +99,25 @@
         </UpdateText>
 
 
-        <ReplaceUIScript id="Spectator_UnitPanel" criteria="Expansion2">
+        <ReplaceUIScript id="Spectator_UnitPanel"> 
+            <Criteria>Expansion2</Criteria>
+            <Criteria>NO_BBG5</Criteria>
             <Properties>
                 <LoadOrder>9999</LoadOrder>
                 <LuaContext>UnitPanel</LuaContext>
                 <LuaReplace>UI/Replacements/unitpanel_spec.lua</LuaReplace>
             </Properties>
         </ReplaceUIScript>
+        <ReplaceUIScript id="Spectator_UnitPanel_BBG"> 
+            <Criteria>Expansion2</Criteria>
+            <Criteria>BBG5</Criteria>
+            <Properties>
+                <LoadOrder>9999</LoadOrder>
+                <LuaContext>UnitPanel</LuaContext>
+                <LuaReplace>UI/Replacements/compatibility/unitpanel_spec_bbg.lua</LuaReplace>
+            </Properties>
+        </ReplaceUIScript>
+
         <ReplaceUIScript id="Spectator_LaunchBar" criteria="Expansion2">
             <Properties>
                 <LoadOrder>9999</LoadOrder>
@@ -168,8 +188,6 @@
             </Properties>
             <File>UI/ToolTipHelper_PlayerYields.lua</File>
         </ImportFiles>
-
-
         <ImportFiles id="Spectator_CityStates">
             <Properties>
                 <LoadOrder>9999</LoadOrder>
@@ -207,9 +225,26 @@
             <File>UI/Replacements/statusmessagepanel.lua</File>
             <File>UI/Replacements/techtree_spec.lua</File>
             <File>UI/Replacements/unitflagmanager.lua</File>
-            <File>UI/Replacements/unitpanel_spec.lua</File>
+            <!--<File>UI/Replacements/unitpanel_spec.lua</File>-->
             <File>UI/Replacements/worldinput_spec.lua</File>
             <File>UI/Replacements/worldtracker.lua</File>
+        </ImportFiles>
+        <!--Spectator UI that can clash with BBG-->
+        <ImportFiles id="import_spectator_unitpanel">
+            <Criteria>Expansion2</Criteria>
+            <Criteria>NO_BBG5</Criteria>
+            <Properties>
+                <LoadOrder>9999</LoadOrder>
+            </Properties>
+            <File>UI/Replacements/unitpanel_spec.lua</File>
+        </ImportFiles>
+        <ImportFiles id="import_spectator_unitpanel_bbg5">
+            <Criteria>Expansion2</Criteria>
+            <Criteria>BBG5</Criteria>            
+            <Properties>
+                <LoadOrder>9999</LoadOrder>
+            </Properties>
+            <File>UI/Replacements/compatibility/unitpanel_spec_bbg.lua</File>
         </ImportFiles>
 
 
@@ -285,6 +320,7 @@
         <File>UI/Replacements/unitpanel_spec.lua</File>
         <File>UI/Replacements/worldinput_spec.lua</File>
         <File>UI/Replacements/worldtracker.lua</File>
+        <File>UI/Replacements/compatibility/unitpanel_spec_bbg.lua</File>
 
         <File>Configuration/Config.xml</File>
         <File>Configuration/Config_Beta.xml</File>

@@ -168,8 +168,11 @@ function Spec_Script_Init()
 				end
 				--print("GameInfo.Civics[DIPLOMATIC_SERVICE].Index",GameInfo.Civics["CIVIC_DIPLOMATIC_SERVICE"].Index)
 				--pPlayerCulture:ReverseBoost(GameInfo.Civics["CIVIC_DIPLOMATIC_SERVICE"].Index)
-				local pPlayerTechs:table = Players[MajorList[i]]:GetTechs();
-				pPlayerTechs:ReverseBoost(GameInfo.Technologies["TECH_WRITING"].Index)
+				--added clause to reverse writing boost only for spectators and not for other players.
+				if PlayerConfigurations[MajorList[i]]:GetLeaderTypeName() == "LEADER_SPECTATOR" then
+					local pPlayerTechs:table = Players[MajorList[i]]:GetTechs();
+					pPlayerTechs:ReverseBoost(GameInfo.Technologies["TECH_WRITING"].Index)
+				end
 			end
 			pPlayerCulture = Players[Game:GetProperty("SPEC_ID_"..k)]:GetCulture()
 			pPlayerCulture:SetCivic(GameInfo.Civics["CIVIC_CODE_OF_LAWS"].Index,true)
