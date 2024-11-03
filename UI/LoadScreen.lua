@@ -235,8 +235,11 @@ function OnLoadScreenContentReady()
 		    if GameConfiguration.GetValue("MPH_PRESET") == 4 then
 		        backgroundTexture = "BSM_LoadingBG_CPL.dds";
 		    end
-		    if GameConfiguration.GetValue("MPH_PRESET") == 6 then
+		    if GameConfiguration.GetValue("MPH_PRESET") == 10 then
 		    	backgroundTexture = "BSM_LoadingBG_TwoVITwo.dds"
+		    end
+				if GameConfiguration.GetValue("MPH_PRESET") == 11 then
+		    	backgroundTexture = "BSM_LoadingBG_GOAT.dds"
 		    end
 		end
 		if GameConfiguration.GetValue("GAMEMODE_ZEVENT2022") ~= nil and GameConfiguration.GetValue("GAMEMODE_ZEVENT2022") == true then

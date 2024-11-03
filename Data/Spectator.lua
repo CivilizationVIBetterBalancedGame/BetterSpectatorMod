@@ -99,7 +99,7 @@ ExposedMembers.LuaEvents = LuaEvents
 
 local bLaunch = false;
 local spec_num = 0
-local g_version = "v1.24"
+local g_version = "v1.27"
 
 
 function Spec_Script_Init()
